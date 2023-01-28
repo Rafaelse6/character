@@ -1,14 +1,18 @@
 package com.rafaelsantos.character.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Character {
-	
+public class Character implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 	private String name;
 	private String world;
 	
-	public Character() {}
+	public Character() {
+		
+	}
 	
 	public Character(Long id, String name, String world) {
 		super();
