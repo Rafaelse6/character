@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rafaelsantos.character.entities.Character;
+import com.rafaelsantos.character.resources.exceptions.ResourceNotFoundException;
 
 @Controller
 public class CharacterResource {
@@ -34,7 +35,8 @@ public class CharacterResource {
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("create");
 
-		Character characterFind = characters.stream().filter(character -> id.equals(character.getId())).findFirst().get();
+		Character characterFind = characters.stream().filter(character -> id.equals(character.getId())).findFirst()
+				.orElseThrow(() -> new ResourceNotFoundException("Character not found"));
 		mv.addObject("character", characterFind);
 		return mv;
 	}
